@@ -61,7 +61,7 @@ class Home extends StatelessWidget {
                                 SvgPicture.asset(AppIcons.notasks)
                               ],
                             ):
-                            SizedBox(height: (screenHeight * (2.1/3)),
+                            SizedBox(height: (screenHeight * (3.12/4)),
                               child: ListView.separated(padding: EdgeInsets.all(20), itemBuilder: (context, index) => TaskContainer(title: state.tasks[index].title, description: state.tasks[index].description),
                                   separatorBuilder: (context, index) => SizedBox(height: 20),
                                   itemCount: state.tasks.length),

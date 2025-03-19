@@ -24,80 +24,82 @@ class RegisterView extends StatelessWidget {
       create: (context) => RegisterCubit(),
       child: Scaffold(
         backgroundColor: AppColors.primary,
-        body: Builder(
-            builder: (context) {
-              return SafeArea(top: true,
-                child: Column(
-                  children:
-                  [ImageManagerView(
-                    onSelected: (XFile image) {},
-                    selectedImageBuilder: (XFile image) {
-                      return ProfilePicture(height: (screenHeight / 3), width: double.infinity, image: FileImage(File(image.path)));
-                    },
-                    unSelectedImageBuilder: () {
-                      return ProfilePicture(height: (screenHeight / 3), width: double.infinity, image: AssetImage(AppImages.Palestine));
-                    },
-                  ),
-                    SizedBox(height: 20),
-                    TextContainer(width: double.infinity,
-                      label: 'Name',
-                      hint: 'Type your name here',
-                      borderColor: AppColors.green,
-                      textController: RegisterCubit.get(context).nameController,
-                    ),
-                    SizedBox(height: 20),
-                    TextContainer(width: double.infinity,
-                      label: 'Password',
-                      hint: 'Type your password here',
-                      borderColor: AppColors.green,
-                      textController: RegisterCubit.get(context).passwordController,
-                    ),
-                    SizedBox(height: 20),
-                    TextContainer(width: double.infinity,
-                      label: 'Confirm Password',
-                      hint: 'Repeat the password',
-                      borderColor: AppColors.green,
-                      textController: RegisterCubit.get(context).confirmPassword,
-                    ),
-                    SizedBox(height: 10),
-                    BlocConsumer<RegisterCubit, RegisterState>(
-                      listener: (context, state) {
-                        print(state.toString());
+        body: SingleChildScrollView(
+          child: Builder(
+              builder: (context) {
+                return SafeArea(top: true,
+                  child: Column(
+                    children:
+                    [ImageManagerView(
+                      onSelected: (XFile image) {},
+                      selectedImageBuilder: (XFile image) {
+                        return ProfilePicture(height: (screenHeight / 3), width: double.infinity, image: FileImage(File(image.path)));
                       },
-                      builder: (context, state) {
-                        if(state is RegisterLoadingState)
-                        {
-                          return CircularProgressIndicator();
-                        }
-                        else
-                        {
-                          return Column(
-                            children: [
-                              state is RegisterSuccessState?
-                              MessageWithButton(message: state.msg, buttonLabel: "Login", messageColor: AppColors.green, onPressed: (){myNavigator(context, screen: LoginView());})
-                                  : state is RegisterErrorState?
-                              MessageWithButton(message: state.error, buttonLabel: 'Register', messageColor: AppColors.red, onPressed: (){RegisterCubit.get(context).register();})
-                                  : MessageWithButton(message: '', buttonLabel: 'Register', onPressed: (){RegisterCubit.get(context).register();})
-                            ],
-                          );
-                        }
+                      unSelectedImageBuilder: () {
+                        return ProfilePicture(height: (screenHeight / 3), width: double.infinity, image: AssetImage(AppImages.Palestine));
                       },
                     ),
-                    SizedBox(height: 20),
-                    InkWell(
-                      onTap: (){myNavigator(context, screen: LoginView());},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Already have an account?  "),
-                          Text("Login", style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),),
-                        ],
+                      SizedBox(height: 20),
+                      TextContainer(width: double.infinity,
+                        label: 'Name',
+                        hint: 'Type your name here',
+                        borderColor: AppColors.green,
+                        textController: RegisterCubit.get(context).nameController,
                       ),
-                    )
-                  ],
-                ),
-              );
-            }
+                      SizedBox(height: 20),
+                      TextContainer(width: double.infinity,
+                        label: 'Password',
+                        hint: 'Type your password here',
+                        borderColor: AppColors.green,
+                        textController: RegisterCubit.get(context).passwordController,
+                      ),
+                      SizedBox(height: 20),
+                      TextContainer(width: double.infinity,
+                        label: 'Confirm Password',
+                        hint: 'Repeat the password',
+                        borderColor: AppColors.green,
+                        textController: RegisterCubit.get(context).confirmPassword,
+                      ),
+                      SizedBox(height: 10),
+                      BlocConsumer<RegisterCubit, RegisterState>(
+                        listener: (context, state) {
+                          print(state.toString());
+                        },
+                        builder: (context, state) {
+                          if(state is RegisterLoadingState)
+                          {
+                            return CircularProgressIndicator();
+                          }
+                          else
+                          {
+                            return Column(
+                              children: [
+                                state is RegisterSuccessState?
+                                MessageWithButton(message: state.msg, buttonLabel: "Login", messageColor: AppColors.green, onPressed: (){myNavigator(context, screen: LoginView());})
+                                    : state is RegisterErrorState?
+                                MessageWithButton(message: state.error, buttonLabel: 'Register', messageColor: AppColors.red, onPressed: (){RegisterCubit.get(context).register();})
+                                    : MessageWithButton(message: '', buttonLabel: 'Register', onPressed: (){RegisterCubit.get(context).register();})
+                              ],
+                            );
+                          }
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      InkWell(
+                        onTap: (){myNavigator(context, screen: LoginView());},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Already have an account?  "),
+                            Text("Login", style: TextStyle(color: AppColors.black, fontWeight: FontWeight.bold),),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }
+          ),
         ),
       ),
     );

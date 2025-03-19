@@ -19,48 +19,49 @@ class UpdateProfileView extends StatelessWidget {
       create: (context) => UpdateProfileCubit(),
       child: Scaffold(
         backgroundColor: AppColors.primary,
-        body: Builder(
-          builder: (context) {
-            return Column(
-              children: [
-                SizedBox(height: 24),
-                ProfilePicture(height: 250, width: double.infinity, image: AssetImage(AppImages.Palestine)),
-                SizedBox(height: 20),
-                Builder(builder: (context) => Column(
-                  children: [
-                    TextContainer(
-                      label: "Username",
-                      hint: "Type your name here",
-                      textController: UpdateProfileCubit.get(context).nameController,
-                      borderColor: AppColors.green,),
-                    SizedBox(height: 10),
-                  ],
-                )),
-                SizedBox(height: 10),
-                BlocConsumer<UpdateProfileCubit, UpdateState>(builder: (context, state) {
-                  if(state is UpdateLoadingState)
+        body: SafeArea(
+          child: Builder(
+            builder: (context) {
+              return Column(
+                children: [
+                  ProfilePicture(height: 250, width: double.infinity, image: AssetImage(AppImages.Palestine)),
+                  SizedBox(height: 20),
+                  Builder(builder: (context) => Column(
+                    children: [
+                      TextContainer(
+                        label: "Username",
+                        hint: "Type your name here",
+                        textController: UpdateProfileCubit.get(context).nameController,
+                        borderColor: AppColors.green,),
+                      SizedBox(height: 10),
+                    ],
+                  )),
+                  SizedBox(height: 10),
+                  BlocConsumer<UpdateProfileCubit, UpdateState>(builder: (context, state) {
+                    if(state is UpdateLoadingState)
+                    {
+                      return CircularProgressIndicator();
+                    }
+                    else
+                    {
+                      return Column(
+                        children: [
+                          state is UpdateSuccessState?
+                          MessageWithButton(message: state.msg, buttonLabel: "Profile", messageColor: AppColors.green, onPressed: (){myNavigator(context, screen: Home());})
+                              : state is UpdateErrorState?
+                          MessageWithButton(message: state.error, buttonLabel: 'Update', messageColor: AppColors.red, onPressed: (){UpdateProfileCubit.get(context).update();})
+                              : MessageWithButton(message: '', buttonLabel: 'Update', onPressed: (){UpdateProfileCubit.get(context).update();})
+                        ],
+                      );
+                    }
+                  }, listener: (context, state)
                   {
-                    return CircularProgressIndicator();
-                  }
-                  else
-                  {
-                    return Column(
-                      children: [
-                        state is UpdateSuccessState?
-                        MessageWithButton(message: state.msg, buttonLabel: "Profile", messageColor: AppColors.green, onPressed: (){myNavigator(context, screen: Home());})
-                            : state is UpdateErrorState?
-                        MessageWithButton(message: state.error, buttonLabel: 'Update', messageColor: AppColors.red, onPressed: (){UpdateProfileCubit.get(context).update();})
-                            : MessageWithButton(message: '', buttonLabel: 'Login', onPressed: (){UpdateProfileCubit.get(context).update();})
-                      ],
-                    );
-                  }
-                }, listener: (context, state)
-                {
-                  print(state.toString());
-                }),
-              ],
-            );
-          }
+                    print(state.toString());
+                  }),
+                ],
+              );
+            }
+          ),
         ),
       ),
     );
