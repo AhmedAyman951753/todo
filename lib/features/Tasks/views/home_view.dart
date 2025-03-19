@@ -22,59 +22,61 @@ class Home extends StatelessWidget {
     return BlocProvider(create: (context) => GetTasksCubit()..getTasks(),
       child: Scaffold(
         backgroundColor: AppColors.primary,
-        body: Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  ProfileAppBar(),
-                  Expanded(
-                    child: Container(
-                        margin: EdgeInsets.only(top: 10),
-                        child: InkWell(
-                          onTap: () => myNavigator(context, screen: AddTask()),
-                          child: SvgPicture.asset(AppIcons.plus))),
-                  )
-                ],
-              ),
-              SizedBox(height: 30),
-              BlocConsumer<GetTasksCubit, GetTasksState>(listener: (context, state){print(state.toString());},
-                  builder: (context, state)
-                  {
-                    if (state is GetTasksSuccessState)
-                      {
-                        return Column(
-                          children: [
-                            TaskCounter(label: "Tasks", number: state.tasks.length),
-                            SizedBox(height: 20),
-                            (state.tasks.isEmpty)?
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("There are no tasks yet,\n     Press the button\n    To add New Task ")
-                                  ],
-                                ),
-                                SizedBox(height: 20),
-                                SvgPicture.asset(AppIcons.notasks)
-                              ],
-                            ):
-                            SizedBox(height: (screenHeight * (3.12/4)),
-                              child: ListView.separated(padding: EdgeInsets.all(20), itemBuilder: (context, index) => TaskContainer(title: state.tasks[index].title, description: state.tasks[index].description),
-                                  separatorBuilder: (context, index) => SizedBox(height: 20),
-                                  itemCount: state.tasks.length),
-                            )
-                          ],
-                        );
-                      }
-                    else
-                      {
-                        return SizedBox();
-                      }
-                  })
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    ProfileAppBar(),
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: InkWell(
+                            onTap: () => myNavigator(context, screen: AddTask()),
+                            child: SvgPicture.asset(AppIcons.plus))),
+                    )
+                  ],
+                ),
+                SizedBox(height: 30),
+                BlocConsumer<GetTasksCubit, GetTasksState>(listener: (context, state){print(state.toString());},
+                    builder: (context, state)
+                    {
+                      if (state is GetTasksSuccessState)
+                        {
+                          return Column(
+                            children: [
+                              TaskCounter(label: "Tasks", number: state.tasks.length),
+                              SizedBox(height: 20),
+                              (state.tasks.isEmpty)?
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("There are no tasks yet,\n     Press the button\n    To add New Task ")
+                                    ],
+                                  ),
+                                  SizedBox(height: 20),
+                                  SvgPicture.asset(AppIcons.notasks)
+                                ],
+                              ):
+                              SizedBox(height: (screenHeight * (3/4)),
+                                child: ListView.separated(padding: EdgeInsets.all(20), itemBuilder: (context, index) => TaskContainer(title: state.tasks[index].title, description: state.tasks[index].description),
+                                    separatorBuilder: (context, index) => SizedBox(height: 20),
+                                    itemCount: state.tasks.length),
+                              )
+                            ],
+                          );
+                        }
+                      else
+                        {
+                          return SizedBox();
+                        }
+                    })
+              ],
+            ),
           ),
         ),
 

@@ -41,6 +41,7 @@ dependencies:
   get: ^4.7.2
   dio: ^5.8.0+1
   image_picker: ^1.1.2
+  flutter_native_splash: ^2.4.4
   flutter_launcher_icons: ^0.13.1
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,13 @@ flutter_icons:
   ios: true
   image_path: "assets/images/todo_splash.png"
 
+flutter_native_splash:
+  color: "#F3F5F4" # Background color of the splash screen
+  image: "assets/images/todo_splash.png" # Path to your splash image
+  android: true # Enable for Android
+  ios: true # Enable for iOS
+  android_gravity: center # Center the image on Android
+  ios_content_mode: center # Center the image on iOS
 # The following section is specific to Flutter packages.
 flutter:
 
