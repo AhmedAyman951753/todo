@@ -1,8 +1,8 @@
-# todo
+# TODO APP
 
-A new Flutter project.
+🚀 A simple and efficient task management app built with Flutter.
 
-## Getting Started
+## Features
 
 This project is a starting point for a Flutter application.
 
