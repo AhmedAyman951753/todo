@@ -15,7 +15,9 @@
 
 ## Screens
 #Splash_screen
-![Splash_screen](https://github.com/user-attachments/assets/e4fbc681-4151-47c7-9a7b-24751f7e84b2)
+![Splash_screen](https://github.com/user-attachments/assets/e4fbc681-4151-47c7-9a7b-24751f7e84b2)   Splash_screen
+
+
 #Start_screen
 ![Start_screen](https://github.com/user-attachments/assets/f8439cad-a71a-4684-98b3-35fae16132c8)
 ![Register_screen](https://github.com/user-attachments/assets/b70f1453-53ce-4d72-8001-07e0e163fd42)
