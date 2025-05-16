@@ -40,7 +40,7 @@ class UpdateProfileView extends StatelessWidget {
                   BlocConsumer<UpdateProfileCubit, UpdateState>(builder: (context, state) {
                     if(state is UpdateLoadingState)
                     {
-                      return CircularProgressIndicator();
+                      return CircularProgressIndicator(color: AppColors.green);
                     }
                     else
                     {

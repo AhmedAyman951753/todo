@@ -54,7 +54,7 @@ class AddTask extends StatelessWidget {
                     {
                       if (state is AddTaskLoadingState)
                         {
-                          return CircularProgressIndicator();
+                          return CircularProgressIndicator(color: AppColors.green);
                         }
                       else
                         {

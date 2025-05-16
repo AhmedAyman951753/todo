@@ -51,7 +51,7 @@ class LoginView extends StatelessWidget {
                         builder: (context, state) {
                           if(state is LoginLoadingState)
                           {
-                            return CircularProgressIndicator();
+                            return CircularProgressIndicator(color: AppColors.green);
                           }
                           else
                           {

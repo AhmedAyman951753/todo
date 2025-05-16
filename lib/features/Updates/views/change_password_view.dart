@@ -55,7 +55,7 @@ class ChangePasswordView extends StatelessWidget {
                 {
                   if (state is ChangeLoadingState)
                   {
-                    return CircularProgressIndicator();
+                    return CircularProgressIndicator(color: AppColors.green);
                   }
                   else
                   {

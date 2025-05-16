@@ -68,7 +68,7 @@ class RegisterView extends StatelessWidget {
                         builder: (context, state) {
                           if(state is RegisterLoadingState)
                           {
-                            return CircularProgressIndicator();
+                            return CircularProgressIndicator(color: AppColors.green);
                           }
                           else
                           {
